@@ -1,0 +1,14 @@
+{
+  "name": "JXChat",
+  "version": "0.0.1",
+  "description": "MQTT 测试",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Andy Jin",
+  "license": "ISC",
+  "devDependencies": {
+    "mqtt": "~0.3.12"
+  }
+}
