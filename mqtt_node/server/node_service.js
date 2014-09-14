@@ -6,9 +6,7 @@ mqtt.createServer(function(client) {
   if (!self.clients) self.clients = {};
 
   client.on('connect', function(packet) {
-
-    console.log('receive a message');
-
+    
     client.connack({returnCode: 0});
     client.id = packet.clientId;
     self.clients[client.id] = client;
