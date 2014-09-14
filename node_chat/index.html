@@ -5,23 +5,29 @@
 	<title>simple chat</title>
 </head>
 <body>
-	<script src='src/jquery-1.11.1.js'></script>
+	<script src='src/jquery-1.8.0.min.js'></script>
 	<h1>聊天室</h1>
-
 	<div>
-		<span>
-			用户名:
-			<input id="topicTF" type="text" name="topic" value="andyJin"/>
-		</span>
-		<span>
-			发送消息:
-			<input id="payloadTF" type="text" name="payload" value="hi"/>
-		</span>
-		<span>
-			<input type="button" onclick="sendMessage()", value="发送" />
-		</span>
-	<div>
+		<div>
+			<span>
+				用户名:
+				<input id="topicTF" type="text" name="topic" value="andyJin"/>
+			</span>
+			<span>
+				发送消息:
+				<input id="payloadTF" type="text" name="payload" value="hi"/>
+			</span>
+			<span>
+				<input type="button" onclick="sendMessage()", value="发送" />
+			</span>
+		</div>
+		<div id="payload_view">
+		
+		</div>
+	</div>
 	<script>
+		var strHtml = '';
+
 		function sendMessage() {
 			// 输入框
 			var topicTF = document.getElementById('topicTF');
@@ -39,17 +45,19 @@
 				type: 'GET',
 				url: 'http://192.168.1.11:3000/chat',
 				async: false,
-				dataType: 'json',
+				dataType: 'text',
 				data:{
-					'topic'  : topic,
-					'payload': payload,
-					'date'   : date
+					topic  : topic,
+					payload: payload,
+					date   : date
 				},
 				success:function(data){	
-					alert('success');				
+					strHtml += '<div>'+data+'</div>';
+					$("#payload_view").html(strHtml);
 				},
 				error: function( data ){			
-					alert('failed');				
+					alert('failed');		
+					console.log(data);		
 				}
 			});
 		}
