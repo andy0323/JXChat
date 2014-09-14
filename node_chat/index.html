@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>simple chat</title>
+</head>
+<body>
+	<script src='src/jquery-1.11.1.js'></script>
+	<h1>聊天室</h1>
+
+	<div>
+		<span>
+			用户名:
+			<input id="topicTF" type="text" name="topic" value="andyJin"/>
+		</span>
+		<span>
+			发送消息:
+			<input id="payloadTF" type="text" name="payload" value="hi"/>
+		</span>
+		<span>
+			<input type="button" onclick="sendMessage()", value="发送" />
+		</span>
+	<div>
+	<script>
+		function sendMessage() {
+			// 输入框
+			var topicTF = document.getElementById('topicTF');
+			var payloadTF = document.getElementById('payloadTF');
+
+			// 输入值
+			var topic = topicTF.value;
+			var payload = payloadTF.value;
+			
+			// 时间搓,解决304
+			var date = Date.parse(new Date());
+
+			// 发送请求
+			$.ajax({
+				type: 'GET',
+				url: 'http://192.168.1.11:3000/chat',
+				async: false,
+				dataType: 'json',
+				data:{
+					'topic'  : topic,
+					'payload': payload,
+					'date'   : date
+				},
+				success:function(data){	
+					alert('success');				
+				},
+				error: function( data ){			
+					alert('failed');				
+				}
+			});
+		}
+	</script>
+</body>
+</html>
