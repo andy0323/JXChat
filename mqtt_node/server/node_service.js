@@ -6,13 +6,16 @@ mqtt.createServer(function(client) {
   if (!self.clients) self.clients = {};
 
   client.on('connect', function(packet) {
-    
+
     client.connack({returnCode: 0});
     client.id = packet.clientId;
     self.clients[client.id] = client;
   });
 
   client.on('publish', function(packet) {
+
+    console.log( packet.topic + ' say: ' + packet.payload);
+
     for (var k in self.clients) {
       self.clients[k].publish({topic: packet.topic, payload: packet.payload});
     }
@@ -25,6 +28,7 @@ mqtt.createServer(function(client) {
     }
 
     client.suback({granted: granted, messageId: packet.messageId});
+
   });
 
   client.on('pingreq', function(packet) {
