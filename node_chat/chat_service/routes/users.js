@@ -15,7 +15,7 @@ router.get('/', function(req, res) {
 });
 
 function sendMsg(res, topic, payload) {
-	client = mqtt.createClient(1883, '192.168.1.11');
+	client = mqtt.createClient(1883, '192.168.6.74');
 
 	client.publish(topic, payload);
 
